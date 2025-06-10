@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事業戦略＆営業戦略 (単一コード版)</title>
+    <!-- Google Fonts の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSSをHTMLに埋め込み -->
+    <style>
+        /* 基本設定と変数定義 */
+        :root {
+            --main-color: #FFA500; /* メインオレンジ */
+            --accent-color: #FFF9C4; /* アクセント淡い黄色 */
+            --text-color: #333;
+            --background-color: #fdfdfd;
+            --header-height: 70px;
+        }
+
+        /* 基本的なリセット */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* スムーズスクロールを有効化 */
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(135deg, var(--main-color), #ffc107);
+            color: white;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* ナビゲーション */
+        .nav-list {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-list li {
+            margin-left: 25px;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list a:hover, .nav-list a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ハンバーガーメニュー (モバイル用) */
+        .hamburger-menu {
+            display: none; /* デスクトップでは非表示 */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1100; /* ナビゲーションより手前に */
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* メインコンテンツ */
+        main {
+            padding-top: var(--header-height); /* 固定ヘッダー分の余白 */
+        }
+
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--main-color);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--main-color);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid var(--main-color);
+        }
+
+        /* 粗利計算式 */
+        .formula-box {
+            background-color: var(--accent-color);
+            border: 2px solid var(--main-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .formula-main {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .formula-detail {
+            margin-top: 15px;
+        }
+        .formula-detail h3 {
+            font-size: 1.2rem;
+            border: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+        .formula-detail p {
+            font-size: 1.1rem;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .formula-indent {
+            margin-left: 20px;
+            font-size: 1rem !important;
+            background-color: #f9f9f9 !important;
+        }
+
+        /* テーブル */
+        .table-container {
+            overflow-x: auto; /* テーブルがはみ出す場合に横スクロールを許可 */
+            -webkit-overflow-scrolling: touch; /* iOSでの慣性スクロール */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 600px; /* テーブルの最小幅を指定 */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        thead th {
+            background-color: var(--main-color);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f8f8; /* 交互の背景色 */
+        }
+
+        tbody tr:hover {
+            background-color: var(--accent-color);
+        }
+
+        td:not(:first-child) {
+            text-align: right;
+        }
+
+        /* 戦略・方針リスト */
+        .policy-item {
+            margin-bottom: 20px;
+        }
+        .policy-item ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .policy-item li {
+            background-color: #fff;
+            padding: 15px;
+            border-left: 4px solid var(--main-color);
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+
+        /* フッター */
+        .footer {
+            background-color: #333;
+            color: #eee;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* レスポンシブ対応 (モバイル) */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav {
+                /* モバイルメニュー用のスタイル */
+                position: fixed;
+                top: 0; /* ヘッダーの上から表示 */
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(40, 40, 40, 0.95);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+            }
+            
+            .nav.is-active {
+                transform: translateX(0);
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-list li {
+                margin: 20px 0;
+            }
+            
+            .nav-list a {
+                font-size: 1.5rem;
+                padding: 10px 20px;
+            }
+
+            .hamburger-menu {
+                display: block; /* モバイルで表示 */
+            }
+            
+            /* ハンバーガーメニューがアクティブな時のアイコン変化 */
+            .hamburger-menu.is-active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger-menu.is-active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger-menu.is-active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダーとナビゲーション -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">事業戦略＆営業戦略</h1>
+            <nav class="nav" id="js-nav">
+                <ul class="nav-list">
+                    <li><a href="#gross-profit-formula">粗利計算式</a></li>
+                    <li><a href="#term-description">項目説明</a></li>
+                    <li><a href="#yearly-transition">年度別推移</a></li>
+                    <li><a href="#strategy-policy">戦略方針</a></li>
+                    <li><a href="#specific-measures">具体的打ち手</a></li>
+                </ul>
+            </nav>
+            <!-- ハンバーガーメニューボタン -->
+            <button class="hamburger-menu" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- A. 粗利計算式セクション -->
+        <section id="gross-profit-formula" class="content-section">
+            <div class="container">
+                <h2>粗利計算式</h2>
+                <div class="formula-box">
+                    <p class="formula-main"><strong>粗利 ＝ 【新規粗利】 + 【既存粗利】</strong></p>
+                    <div class="formula-detail">
+                        <h3>【新規粗利】</h3>
+                        <p>= 新規受注会員人数 × 新規受注社数/人 × 新規売上単価/社 × 新規粗利率</p>
+                        <p class="formula-indent">└ 新規受注会員人数： (全会員数 × 受注社割合)</p>
+                    </div>
+                    <div class="formula-detail">
+                        <h3>【既存粗利】</h3>
+                        <p>= 既存受注社数 × 既存売上単価/社 × 既存粗利率</p>
+                        <p class="formula-indent">└ 既存受注社数： (新規受注社数 × リピート率)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- B. 項目説明表セクション -->
+        <section id="term-description" class="content-section">
+            <div class="container">
+                <h2>項目説明</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>受注会員人数</td>
+                                <td>受注した会員人数（期間中）</td>
+                            </tr>
+                            <tr>
+                                <td>新規受注社数／人</td>
+                                <td>会員1人あたりが新規で受注する企業数（期間中）</td>
+                            </tr>
+                            <tr>
+                                <td>新規売上単価／社</td>
+                                <td>新規受注1社あたりの売上金額</td>
+                            </tr>
+                             <tr>
+                                <td>新規粗利率</td>
+                                <td>新規案件での粗利率</td>
+                            </tr>
+                            <tr>
+                                <td>既存受注社数</td>
+                                <td>新規で受注した顧客のうち2回目以降の受注社数</td>
+                            </tr>
+                            <tr>
+                                <td>既存売上単価／社</td>
+                                <td>既存クライアント1社あたりの月次売上金額</td>
+                            </tr>
+                            <tr>
+                                <td>既存粗利率</td>
+                                <td>既存案件における粗利率</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- C. 各指標の年度別推移セクション -->
+        <section id="yearly-transition" class="content-section">
+            <div class="container">
+                <h2>各指標の年度別推移</h2>
+                
+                <h3>新規</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>指標</th>
+                                <th>2022年</th>
+                                <th>2023年</th>
+                                <th>2024年(12~5月)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>新規受注会員人数</td><td>24</td><td>82</td><td>69</td></tr>
+                            <tr><td>新規受注社数／人</td><td>3.1</td><td>4.6</td><td>3.793103448</td></tr>
+                            <tr><td>新規売上単価／社</td><td>¥588,311</td><td>¥257,923</td><td>¥247,895</td></tr>
+                            <tr><td>新規粗利率</td><td>57.8%</td><td>70.7%</td><td>63.8%</td></tr>
+                            <tr><td>新規合計売上</td><td>¥43,535,000</td><td>¥97,495,000</td><td>¥64,880,105</td></tr>
+                            <tr><td>新規合計粗利</td><td>¥25,169,000</td><td>¥68,893,000</td><td>¥41,393,507</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>既存</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>指標</th>
+                                <th>2022年</th>
+                                <th>2023年</th>
+                                <th>2024年(12~5月)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr><td>既存受注社数</td><td>16</td><td>468</td><td>187</td></tr>
+                             <tr><td>既存売上単価／社</td><td>¥601,500</td><td>¥514,703</td><td>¥485,337</td></tr>
+                             <tr><td>既存粗利率</td><td>51.1%</td><td>64.0%</td><td>68.7%</td></tr>
+                             <tr><td>既存合計売上</td><td>¥9,624,000</td><td>¥240,881,143</td><td>¥90,758,019</td></tr>
+                             <tr><td>既存合計粗利</td><td>¥4,921,000</td><td>¥154,087,714</td><td>¥62,350,759</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>合計</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>指標</th>
+                                <th>2022年</th>
+                                <th>2023年</th>
+                                <th>2024年(12~5月)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>合計受注金額</td><td>¥53,159,000</td><td>¥338,376,143</td><td>¥155,638,124</td></tr>
+                            <tr><td>合計粗利金額</td><td>¥30,090,000</td><td>¥222,980,714</td><td>¥103,744,266</td></tr>
+                            <tr><td>粗利率</td><td>56.6%</td><td>65.9%</td><td>66.7%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- D. 事業戦略と営業企画の方針セクション -->
+        <section id="strategy-policy" class="content-section">
+            <div class="container">
+                <h2>事業戦略と営業企画の方針</h2>
+                <div class="policy-item">
+                    <h3>重要KPI設定の背景</h3>
+                    <ul>
+                        <li>“小さく入り大きく育てる” 戦略に合わせ、LTV（顧客生涯価値）の最大化を狙うため。</li>
+                    </ul>
+                </div>
+                <div class="policy-item">
+                    <h3>新規受注会員人数重視</h3>
+                    <ul>
+                        <li>常に受注率をウォッチし、将来の優良顧客となる母集団を形成する。</li>
+                        <li>2年目以降に安定した収益源となる「稼ぎ頭」を育成する。</li>
+                    </ul>
+                </div>
+                <div class="policy-item">
+                    <h3>新規粗利率重視</h3>
+                    <ul>
+                        <li>高利益率であるRPO（採用代行）の比率を高める。</li>
+                        <li>サービス品質を担保し、顧客満足度と単価を維持・向上させる。</li>
+                    </ul>
+                </div>
+                 <div class="policy-item">
+                    <h3>既存受注社数重視</h3>
+                    <ul>
+                        <li>LTVを最大化するため、リピート率と顧客満足度の向上を最優先する。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- E. 具体的な打ち手方針セクション -->
+        <section id="specific-measures" class="content-section">
+            <div class="container">
+                <h2>具体的な打ち手方針</h2>
+                 <div class="policy-item">
+                    <h3>新規受注会員数</h3>
+                    <ul>
+                        <li>初期導入のハードルが低い「ドアノック商材」を開発・提供する。</li>
+                        <li>既存顧客からの「紹介営業」を活性化させる施策を浸透させる。</li>
+                    </ul>
+                </div>
+                 <div class="policy-item">
+                    <h3>新規粗利率</h3>
+                    <ul>
+                        <li>RPOサービスに加えて、独自の高付加価値商品を開発する。</li>
+                        <li>サービス品質を可視化する資料（事例集、レポート）を整備する。</li>
+                        <li>採用活動における応募者対応まで含めた包括的なプランを販売する。</li>
+                    </ul>
+                </div>
+                 <div class="policy-item">
+                    <h3>既存受注社数</h3>
+                    <ul>
+                        <li>リピート率向上のための3つの柱：「密なコミュニケーション（仲良し）」「専門家としての信頼獲得（プロ認定）」「具体的な成功実績の共有」を徹底する。</li>
+                        <li>顧客情報を一元管理する「顧客カルテ」を導入し、定期的なアンケートを実施する。</li>
+                    </ul>
+                </div>
+                 <div class="policy-item">
+                    <h3>ジシャキジ拡販</h3>
+                    <ul>
+                        <li>提案機会の損失を防ぐためのトークスクリプトや資料を整備する。</li>
+                        <li>他社からのリプレイスを防ぐための差別化要因を明確にする。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScriptをHTMLに埋め込み -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const hamburger = document.getElementById('hamburger-menu');
+            const nav = document.getElementById('js-nav');
+
+            // ハンバーガーボタンがクリックされた時の処理
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('is-active');
+                nav.classList.toggle('is-active');
+            });
+
+            const navLinks = document.querySelectorAll('.nav a');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // モバイルメニューが表示されている場合のみ閉じる
+                    if (hamburger.classList.contains('is-active')) {
+                        hamburger.classList.remove('is-active');
+                        nav.classList.remove('is-active');
+                    }
+                });
+            });
+
+            // スムーズスクロール機能
+            const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+
+            for (let link of smoothScrollLinks) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const href = this.getAttribute('href');
+                    const targetElement = (href === "#" || href === "") ? document.documentElement : document.querySelector(href);
+
+                    if (targetElement) {
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = targetPosition - headerHeight;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
